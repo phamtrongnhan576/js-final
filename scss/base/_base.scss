@@ -1,0 +1,82 @@
+@use "../abstracts";
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.6rem;
+    font-family: Lato, sans-serif;
+    color: var(--text-color);
+    background-color: var(--body-bg-color);
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a,
+img,
+input,
+label,
+button,
+select,
+textarea {
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    transition: background-color, 1s, 99999s;
+    -webkit-text-fill-color: var(--text-color);
+    caret-color: var(--text-color);
+}
+button {
+    cursor: pointer;
+}
+.icon {
+    filter: var(--icon-color);
+}
+.container {
+    @include abstracts.screen(sm) {
+        padding-right: 20px !important;
+
+        padding-left: 20px !important;
+    }
+}
+b,
+strong {
+    font-weight: 600;
+}
+i,
+em {
+    font-style: italic;
+}
+.separate {
+    height: 1px;
+    background: var(--separate-color);
+    margin: var(--margin) 0;
+}
+.hidden {
+    display: none;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp, 2);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

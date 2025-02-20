@@ -1,0 +1,321 @@
+@use "../abstracts";
+.form {
+    &:has(:invalid) &__submit-btn {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+    &__row {
+        display: flex;
+        gap: 30px;
+        > * {
+            flex: 1;
+        }
+
+        @include abstracts.screen(md) {
+            gap: 20px;
+        }
+        @include abstracts.screen(sm) {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+    &__group {
+        margin-top: 30px;
+        @include abstracts.screen(md) {
+            margin-top: 20px;
+        }
+        &--inline {
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__group:has(:invalid):has(&__input:not(:placeholder-shown)) {
+        .form__text-input {
+            background-color: rgba(#ed4337, $alpha: 0.1);
+            border-color: #ed4337;
+        }
+        .form__error,
+        .form__input-icon-error {
+            display: block;
+        }
+        .form__input-icon {
+            display: none;
+        }
+    }
+    &__text-area,
+    &__text-input {
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        padding: 0 12px;
+        border: 1px solid #d2d1d6;
+        &:focus-within {
+            border-color: #77dae6;
+        }
+    }
+    &__text-area {
+        height: 100px;
+        padding: 12px;
+
+        &-input {
+            resize: none;
+        }
+    }
+
+    &__text-input {
+        position: relative;
+
+        height: 50px;
+
+        @include abstracts.screen(md) {
+            height: 48px;
+        }
+        &--small {
+            height: 42px;
+        }
+    }
+    &__input,
+    &__text-area-input {
+        width: 100%;
+        height: 100%;
+        flex: 1;
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 144.444%;
+        &::placeholder {
+            color: #d2d1d6;
+        }
+        @include abstracts.screen(md) {
+            font-size: 1.6rem;
+        }
+    }
+    &__input {
+        width: 100%;
+        &-icon {
+            margin-left: 12px;
+        }
+        &-icon-error {
+            display: none;
+            animation: shake 1s;
+        }
+    }
+    &__dialog-heading {
+        padding: 20px;
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+    }
+    &__select-dialog {
+        position: absolute;
+        z-index: 1;
+        bottom: 44px;
+        left: 0px;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 8px;
+        transition: opacity, visibility, translate;
+        transition-duration: 0.2s;
+        min-width: 230px;
+        max-height: 283px;
+        background-color: var(--form-select-dialog-bg-color);
+        padding-bottom: 10px;
+        border: 1px solid #d2d1d6;
+        border-radius: 10px;
+        box-shadow: 0px 20px 60px 100px var(--dialog-shadow);
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            translate: 0 0;
+        }
+        @include abstracts.screen(sm) {
+            position: fixed;
+            max-width: initial;
+            max-height: initial;
+            inset: 0;
+            border-radius: 0;
+        }
+    }
+    &__close--dialog {
+        font-size: 3rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 5px 18px 1px;
+        opacity: 0.8;
+    }
+    &__search {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        height: 38px;
+        border-bottom: 1px solid var(--checkout-cart-item-border-color);
+        padding: 0 20px;
+        @include abstracts.screen(lg) {
+            height: 48px;
+        }
+        @include abstracts.screen(sm) {
+            padding: 0 14px;
+            border: 1px solid #d2d1d6;
+            margin: 10px 30px 0;
+            border-radius: 10px;
+        }
+        &-input {
+            flex: 1;
+            font-size: 1.6rem;
+            height: 100%;
+        }
+        &-icon {
+            padding-left: 10px;
+        }
+    }
+    &__options-list {
+        margin-top: 8px;
+        flex: 1;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        @supports (-webkit-touch-callout: none) {
+            padding-bottom: 300px;
+        }
+    }
+    &__option {
+        padding: 8px 20px;
+        font-size: 1.4rem;
+
+        &--current {
+            font-weight: 500;
+            background-color: rgb(117, 218, 230, 0.5);
+        }
+        &:not(&--current):hover {
+            background: var(--form-option-hover-bg);
+            cursor: pointer;
+        }
+        @include abstracts.screen(lg) {
+            padding: 18px 30px;
+            font-size: 1.6rem;
+        }
+    }
+    &__error {
+        display: none;
+        color: #ed4337;
+        text-align: left;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+    &__pull-right {
+        margin-left: auto;
+    }
+    &__checkbox {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        gap: 10px;
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+        }
+        &::before {
+            top: 0;
+            width: 19px;
+            height: 19px;
+            border-radius: 5px;
+            border: 1px solid #9e9da8;
+        }
+        &:has(:checked)::after {
+            width: 14px;
+            height: 9px;
+            border: 3px solid;
+            border-color: transparent transparent #fff #fff;
+            rotate: -45deg;
+            left: 2.5px;
+            top: 2px;
+        }
+        &:has(:checked)::before {
+            border-color: #ffb700;
+            background: #ffb700;
+        }
+        &-label {
+            margin-left: 29px;
+            color: #9e9da8;
+            font-size: 1.7rem;
+            font-weight: 500;
+            line-height: 146.667%;
+            @include abstracts.screen(md) {
+                font-size: 1.4rem;
+            }
+        }
+    }
+    &__label {
+        display: block;
+        font-size: 2.2rem;
+        font-weight: 500;
+        line-height: 145.455%;
+        &--medium {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            line-height: 144.444%;
+        }
+        &--small {
+            font-size: 1.4rem;
+            line-height: 142.857%;
+            margin-bottom: 10px;
+            @include abstracts.screen(xl) {
+                width: 100%;
+            }
+        }
+    }
+    &__select-wrap {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        border-radius: 6px;
+        border: 1px solid #d2d1d6;
+    }
+    &__select {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: var(--width, 108px);
+        height: calc(100% - 10px);
+        padding: 0 14px;
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+        cursor: pointer;
+        @include abstracts.screen(xl) {
+            flex: 1;
+        }
+    }
+
+    &__select + &__select {
+        border-left: 1px solid #d2d1d6;
+    }
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        @include abstracts.screen(sm) {
+            gap: 10px;
+        }
+    }
+    &__tag {
+        padding: 6px 12px;
+        color: #9e9da8;
+        border-radius: 6px;
+        background-color: var(--form-tag-bg);
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+        transition: color 0.25s;
+        &:hover {
+            color: var(--text-color);
+        }
+    }
+}
