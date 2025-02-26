@@ -1,6 +1,6 @@
 export let checkAllInPut = (item) => {
   console.log("item: ", item);
-  let isValid =
+  var isValid =
     checkName(item.name) &
     checkPrice(item.price) &
     checkImg(item.img) &
@@ -30,7 +30,7 @@ function checkPrice(value) {
   }
 }
 function checkImg(value) {
-  let pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+  var pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
   if (value.length == 0) {
     showAlert("alertImg", `Empty value is not allowed`);
     return false;

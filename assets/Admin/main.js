@@ -28,7 +28,7 @@ function deleteMaDT(id) {
     });
 }
 function addProduct() {
-  let product = getDataForm();
+  var product = getDataForm();
   axios({
     url: "https://64d6faeb2a017531bc12e738.mockapi.io//product",
     method: "POST",
@@ -58,7 +58,7 @@ function editMaDT(id) {
     });
 }
 function updateProduct() {
-  let product = getDataForm();
+  var product = getDataForm();
   axios({
     url: `https://64d6faeb2a017531bc12e738.mockapi.io//product/${product.id}`,
     method: "PUT",
