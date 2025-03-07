@@ -2,8 +2,8 @@
 
 html {
     --text-color: #1a162e;
-    --icon-color: brightness(0) saturate(100%) invert(7%) sepia(12%) saturate(5838%) hue-rotate(222deg) brightness(99%)
-        contrast(94%);
+    --icon-color: brightness(0) saturate(100%) invert(7%) sepia(12%)
+        saturate(5838%) hue-rotate(222deg) brightness(99%) contrast(94%);
     --header-bg-color: #eee;
     --footer-bg-color: var(--header-bg-color);
 
@@ -98,5 +98,7 @@ html {
     --account-info-bg-color: #f6f6f6;
     --account-info-icon-bg-color: #fff;
     // separate
-    --separate-color:   #d2d1d6;
+    --separate-color: #d2d1d6;
+
+    --management-bg-color: var(--header-bg-color);
 }

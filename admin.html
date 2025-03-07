@@ -1,184 +1,380 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Quản lý sản phẩm</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-
-  <body>
-      <!-- Phan tab menu -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            href="#DanhSachSP"
-            role="tab"
-            data-toggle="tab"
-            >Danh sách sản phẩm</a
-          >
-        </li>
-      </ul>
-      <br />
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <!--Danh sách sản phẩm -->
-        <div role="tabpanel" class="tab-pane in active" id="DanhSachSP">
-          <div class="row">
-            <div class="col-md-8">
-              <!-- BEGIN BUTTOM THÊM MỚI -->
-              <button
-                id="btnThemSP"
-                class="btn btn-success"
-                data-toggle="modal"
-                data-target="#myModal"
-              >
-                <i class="fa fa-plus mr-1"></i>
-                Thêm Mới
-              </button>
-              <!-- END BUTTON THÊM MỚI -->
-            </div>
-            <div class="col-md-4">
-              <!-- BEGIN TÌM KIẾM -->
-              <div id="search" oninput="userSearch()" class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Nhập từ khóa"
-                  aria-label="Recipient's username"
-                  aria-describedby="basic-addon2"
+        <!DOCTYPE html>
+        <html lang="en" class="light">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Grocery Mart</title>
+                <!-- favicon -->
+                <link
+                    rel="apple-touch-icon"
+                    sizes="76x76"
+                    href="./assets/favicon/apple-touch-icon.png"
                 />
-                <div class="input-group-append">
-                  <span class="input-group-text" id="basic-addon2"
-                    ><i class="fa fa-search"></i
-                  ></span>
+                <link
+                    rel="icon"
+                    type="image/png"
+                    sizes="32x32"
+                    href="./assets/favicon/favicon-32x32.png"
+                />
+                <link
+                    rel="icon"
+                    type="image/png"
+                    sizes="16x16"
+                    href="./assets/favicon/favicon-16x16.png"
+                />
+                <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+                <link
+                    rel="mask-icon"
+                    href="./assets/favicon/safari-pinned-tab.svg"
+                    color="#5bbad5"
+                />
+                <meta name="msapplication-TileColor" content="#da532c" />
+                <meta name="theme-color" content="#ffffff" />
+                <!-- Fonts -->
+                <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+                <!-- Owl Carousel CSS -->
+                <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+                />
+                <!-- Styles -->
+                <link rel="stylesheet" href="./assets/css/main.css" />
+                <!-- Scripts -->
+                <script src="./assets/js/scripts.js"></script>
+            </head>
+            <body>
+                <header id="header" class="header"></header>
+                <script>
+                    load("#header", "./templates/header-logined.html");
+                </script>
+                <main>
+                    <section class="management">
+                        <div class="container">
+                            <div class="management__top">
+                                <h1 class="management__heading">Quản lý điện thoại</h1>
+                                <div>
+                                    <div class="filter__form-text-input">
+                                        <input
+                                            type="text"
+                                            id="searchPhone"
+                                            placeholder="Nhập tên sản phẩm"
+                                            class="filter__form-input"
+                                        />
+                                        <img
+                                            src="./assets/icons/filter.svg"
+                                            alt=""
+                                            class="filter__form-input-icon icon js-toggle"
+                                            toggle-target="#sort-confirm"
+                                        />
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn btn--primary management__btn js-toggle"
+                                    toggle-target="#phone-confirm"
+                                    id="phoneAdd"
+                                >
+                                    <img
+                                        class="management__icon"
+                                        src="./assets/icons/add.svg"
+                                        alt=""
+                                    />
+                                    <span>Thêm điện thoại</span>
+                                </button>
+                            </div>
+
+                            <table class="management__table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Điện thoại</th>
+                                        <th>Thương hiệu</th>
+                                        <th>Giá bán</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Mô tả</th>
+                                        <th>Tùy chỉnh</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableDanhSach">
+                                    <!-- Dòng dữ liệu có thể được thêm vào ở đây -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </main>
+                <footer id="footer" class="footer"></footer>
+                <script>
+                    load("#footer", "./templates/footer.html");
+                </script>
+                <!-- modal -->
+                <div id="phone-confirm" class="modal modal--small hide">
+                    <div class="modal__content">
+                        <div class="modal__heading">Quản Lý Điện Thoại</div>
+                        <form id="phoneForm">
+                            <div class="modal__body" id="modalBody">
+                                <div class="form__row">
+                                    <div class="form__group">
+                                        <div class="form__modal">
+                                            <label
+                                                for="phoneName"
+                                                class="form__modal--label"
+                                                ><img
+                                                    src="./assets/icons/phone.svg"
+                                                    alt=""
+                                                    class="form__modal--icon"
+                                                />
+                                            </label>
+                                            <div
+                                                class="form__text-input form__text-input--small form__modal--input"
+                                                style="width: 100%"
+                                            >
+                                                <input
+                                                    type="text"
+                                                    name="phoneName"
+                                                    id="phoneName"
+                                                    placeholder="Tên điện thoại"
+                                                    class="form__input"
+                                                />
+                                            </div>
+                                        </div>
+                                        <p class="form__error" id="tbPhoneName">
+                                            Name must be at 2 characters
+                                        </p>
+                                    </div>
+                                    <div class="form__group">
+                                        <div class="form__modal">
+                                            <label
+                                                for="phoneBrand"
+                                                class="form__modal--label"
+                                                ><img
+                                                    src="./assets/icons/sign.svg"
+                                                    alt=""
+                                                    class="form__modal--icon"
+                                                />
+                                            </label>
+                                            <div
+                                                class="form__text-input form__text-input--small form__modal--input"
+                                                style="width: 100%"
+                                            >
+                                                <select
+                                                    class="form__input"
+                                                    id="phoneBrand"
+                                                >
+                                                    <option>Thương hiệu</option>
+                                                    <option>Apple</option>
+                                                    <option>Samsung</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <p class="form__error" id="tbPhoneBrand"></p>
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__group">
+                                        <div class="form__modal">
+                                            <label
+                                                for="phoneFrontCamera"
+                                                class="form__modal--label"
+                                                ><img
+                                                    src="./assets/icons/camera.svg"
+                                                    alt=""
+                                                    class="form__modal--icon"
+                                                />
+                                            </label>
+                                            <div
+                                                class="form__text-input form__text-input--small form__modal--input"
+                                                style="width: 100%"
+                                            >
+                                                <input
+                                                    type="text"
+                                                    name="phoneFrontCamera"
+                                                    id="phoneFrontCamera"
+                                                    placeholder="Camera trước"
+                                                    class="form__input"
+                                                />
+                                            </div>
+                                        </div>
+                                        <p class="form__error" id="tbPhoneFrontCam"></p>
+                                    </div>
+                                    <div class="form__group">
+                                        <div class="form__modal">
+                                            <label
+                                                for="phoneBackCamera"
+                                                class="form__modal--label"
+                                                ><img
+                                                    src="./assets/icons/camera.svg"
+                                                    alt=""
+                                                    class="form__modal--icon"
+                                                />
+                                            </label>
+                                            <div
+                                                class="form__text-input form__text-input--small form__modal--input"
+                                                style="width: 100%"
+                                            >
+                                                <input
+                                                    type="text"
+                                                    name="phoneBackCamera"
+                                                    id="phoneBackCamera"
+                                                    placeholder="Camera sau"
+                                                    class="form__input"
+                                                />
+                                            </div>
+                                        </div>
+                                        <p class="form__error" id="tbPhoneBackCam"></p>
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__group">
+                                        <div class="form__modal">
+                                            <label
+                                                for="phoneScreen"
+                                                class="form__modal--label"
+                                                ><img
+                                                    src="./assets/icons/phone.svg"
+                                                    alt=""
+                                                    class="form__modal--icon"
+                                                />
+                                            </label>
+                                            <div
+                                                class="form__text-input form__text-input--small form__modal--input"
+                                                style="width: 100%"
+                                            >
+                                                <input
+                                                    type="text"
+                                                    name="phoneScreen"
+                                                    id="phoneScreen"
+                                                    placeholder="Màn hình"
+                                                    class="form__input"
+                                                />
+                                            </div>
+                                        </div>
+                                        <p class="form__error" id="tbPhoneScreen"></p>
+                                    </div>
+                                    <div class="form__group">
+                                        <div class="form__modal">
+                                            <label
+                                                for="phonePrice"
+                                                class="form__modal--label"
+                                                ><img
+                                                    src="./assets/icons/dollar.svg"
+                                                    alt=""
+                                                    class="form__modal--icon"
+                                                />
+                                            </label>
+                                            <div
+                                                class="form__text-input form__text-input--small form__modal--input"
+                                                style="width: 100%"
+                                            >
+                                                <input
+                                                    type="text"
+                                                    name="phonePrice"
+                                                    id="phonePrice"
+                                                    placeholder="Giá tiền"
+                                                    class="form__input"
+                                                />
+                                            </div>
+                                        </div>
+                                        <p class="form__error" id="tbPhonePrice"></p>
+                                    </div>
+                                </div>
+                                <div class="form__group">
+                                    <div class="form__modal">
+                                        <label for="phoneImg" class="form__modal--label"
+                                            ><img
+                                                src="./assets/icons/link.svg"
+                                                alt=""
+                                                class="form__modal--icon"
+                                            />
+                                        </label>
+                                        <div
+                                            class="form__text-input form__text-input--small form__modal--input"
+                                            style="width: 100%"
+                                        >
+                                            <input
+                                                type="text"
+                                                name="phoneImg"
+                                                id="phoneImg"
+                                                placeholder="Link ảnh"
+                                                class="form__input"
+                                            />
+                                        </div>
+                                    </div>
+                                    <p class="form__error" id="tbPhoneImg"></p>
+                                </div>
+                                <div class="form__group">
+                                    <div class="form__modal">
+                                        <label
+                                            for="phoneDesc"
+                                            class="form__modal--label"
+                                            ><img
+                                                src="./assets/icons/comment.svg"
+                                                alt=""
+                                                class="form__modal--icon"
+                                            />
+                                        </label>
+                                        <div
+                                            class="form__text-area form__modal--input form__modal--textArea"
+                                        >
+                                            <textarea
+                                                name="phoneDesc"
+                                                id="phoneDesc"
+                                                placeholder="Mô tả "
+                                                class="form__text-area-input"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <p class="form__error" id="tbPhoneDesc"></p>
+                                </div>
+                            </div>
+                            <div class="modal__bottom not-padding">
+                                <button
+                                    id="addPhone"
+                                    class="btn btn--small btn--blue btn--outline modal__btn"
+                                    type="button"
+                                >
+                                    Lưu
+                                </button>
+                                <button
+                                    class="btn btn--small btn--primary modal__btn btn--no-margin btn--disabled "
+                                    id="savePhone"
+                                    type="button"
+                                    style="color: white"
+                                >
+                                    Cập Nhật
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div
+                        class="modal__overlay js-toggle"
+                        toggle-target="#phone-confirm"
+                    ></div>
                 </div>
-              </div>
-              <!-- END TÌM KIẾM -->
-            </div>
-          </div>
-          <div class="clear-fix"></div>
-          <div class="tblSanPham" id="tblSanPham">
-            <!-- BEGIN TABLE SẢN PHẨM -->
-            <table class="table table-bordered">
-              <thead>
-                <th>STT</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Giá</th>
-                <th>Hình Ảnh</th>
-                <th>Mô Tả</th>
-                <th>Action</th>
-              </thead>
-              <tbody id="tblDanhSachSP"></tbody>
-            </table>
-            <!-- END TABLE SẢN PHẨM -->
-          </div>
-          <br />
-        </div>
-        <!-- Kết thúc danh sách sản phẩm -->
-      </div>
-
-      <!--KetThuc Tabmenu-->
-
-      <!-- The Modal -->
-      <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">Modal Heading</h4>
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Mã Sản Phẩm</label>
-                <input id="MaSP" readonly class="form-control" placeholder="" />
-              </div>
-              <div class="form-group">
-                <label>Tên Sản Phẩm</label>
-                <input
-                  id="TenSP"
-                  class="form-control"
-                  placeholder="Nhập vào tên sản phẩm"
-                />
-              </div>
-              <div class="form-group">
-                <label>Giá</label>
-                <input
-                  id="GiaSP"
-                  class="form-control"
-                  placeholder="Nhập vào giá"
-                />
-              </div>
-              <div class="form-group">
-                <label>Hình Ảnh</label>
-                <input
-                  id="HinhSP"
-                  class="form-control"
-                  placeholder="Nhập vào hình sản phẩm"
-                />
-              </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button onclick="addProduct()" class="btn btn-warning">
-                Thêm
-              </button>
-              <button onclick="updateProduct()" class="btn btn-warning">
-                cập nhập
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="container"></div>
-    <style>
-      #container {
-        min-width: 310px;
-        max-width: 800px;
-        height: 400px;
-        margin: 0 auto;
-      }
-    </style>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <!-- axios -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- my js -->
-    <script src="./assets/Admin/validation.js"></script>
-    <script src="./assets/Admin/main.js"></script>
-    <script src="./assets/Admin/controller.js"></script>
-  </body>
-</html>
+                <div id="sort-confirm" class="modal modal--super-small hide">
+                    <div class="modal__content">
+                        <div class="modal__text">
+                            Bạn muốn sắp xếp danh sách theo giá?
+                        </div>
+                        <div class="modal__bottom modal__bottom--center">
+                            <button class="btn btn--asc" id="btnAsc">
+                                Sắp xếp tăng
+                            </button>
+                            <button class="btn btn--desc" id="btnDesc">
+                                Sắp xếp giảm
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="modal__overlay js-toggle"
+                        toggle-target="#sort-confirm"
+                    ></div>
+                </div>
+                <!-- Thêm script axios qua CDN -->
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script type="module" src="./assets/js/phoneManagement.js"></script>
+            </body>
+        </html>

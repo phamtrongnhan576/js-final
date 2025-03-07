@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Giỏ hàng | Grocery Mart</title>
+        <!-- favicon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="76x76"
+            href="./assets/favicon/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./assets/favicon/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="./assets/favicon/favicon-16x16.png"
+        />
+        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="./assets/favicon/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <!-- Fonts -->
+        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+        <!-- Styles -->
+        <link rel="stylesheet" href="./assets/css/main.css" />
+        <!-- Scripts -->
+        <script src="./assets/js/scripts.js"></script>
+    </head>
+    <body>
+        <header id="header" class="header"></header>
+        <script>
+            load("#header", "./templates/header-logined.html");
+        </script>
+        <main class="checkout-page">
+            <div class="container">
+                <!-- search bar -->
+                <div class="checkout-container">
+                    <div class="search-bar d-none d-md-flex">
+                        <input
+                            type="text"
+                            name=""
+                            id=""
+                            placeholder="Search for item"
+                            class="search-bar__input"
+                        />
+                        <button class="search-bar__submit">
+                            <img
+                                src="./assets/icons/sreach.svg"
+                                alt=""
+                                class="search-bar__icon icon"
+                            />
+                        </button>
+                    </div>
+                </div>
+                <!-- breadcrumbs -->
+                <div class="checkout-container">
+                    <!-- breadcrumbs -->
+                    <ul class="breadcrumbs checkout-page__breadcrumbs">
+                        <li>
+                            <a href="./" class="breadcrumbs__link">
+                                Trang chủ
+                                <img
+                                    src="./assets/icons/arrow-right.svg"
+                                    alt=""
+                                />
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#!"
+                                class="breadcrumbs__link breadcrumbs__link--current"
+                            >
+                                Giỏ Hàng</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="checkout-container">
+                    <div class="row gy-xl-3">
+                        <div class="col-8 col-xl-12">
+                            <div class="cart-info">
+                                <div
+                                    class="cart-info__list"
+                                    id="cartList"
+                                ></div>
+                                <div class="cart-info__bottom d-xl-none">
+                                    <div class="row">
+                                        <div class="col-8 col-xxl-7">
+                                            <div class="cart-info__continue">
+                                                <a
+                                                    href="./"
+                                                    class="cart-info__continue-link"
+                                                >
+                                                    <img
+                                                        src="./assets/icons/arrow-down-2.svg"
+                                                        alt=""
+                                                        class="cart-info__continue-icon icon"
+                                                    />
+                                                    Tiếp tục mua sắm
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-xl-12">
+                            <div class="cart-info">
+                                <div class="cart-info__row">
+                                    <span>Số lượng </span>
+                                    <span id="totalQuantity"></span>
+                                </div>
+                                <div class="cart-info__row">
+                                    <span>Giá tiền </span>
+                                    <span id="totalPrice">0</span>
+                                </div>
+                                <div class="cart-info__row">
+                                    <span>Giao hàng</span>
+                                    <span id="shipPrice">0</span>
+                                </div>
+                                <div class="cart-info__separate"></div>
+                                <div class="cart-info__row cart-info__row">
+                                    <span>Tổng tiền</span>
+                                    <span id="grandPrice">0</span>
+                                </div>
+                                <a
+                                    href="#!"
+                                    class="btn btn--primary btn--rounded cart-info__next-btn"
+                                    id="payCart"
+                                >
+                                    Thanh toán
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer id="footer" class="footer"></footer>
+        <script>
+            load("#footer", "./templates/footer.html");
+        </script>
+
+        <!-- modal -->
+        <div id="delete-confirm" class="modal modal--super-small hide">
+            <div class="modal__content">
+                <div class="modal__text">
+                    Bạn muốn xóa sản phẩm ra khỏi giỏ hàng?
+                </div>
+                <div class="modal__bottom">
+                    <button
+                        class="btn btn--small btn--outline modal__btn js-toggle"
+                        toggle-target="#delete-confirm"
+                    >
+                        Hủy
+                    </button>
+                    <button
+                        class="btn btn--small btn--danger modal__btn btn--no-margin"
+                        id="phone-delete"
+                    >
+                        Xóa
+                    </button>
+                </div>
+            </div>
+            <div
+                class="modal__overlay js-toggle"
+                toggle-target="#delete-confirm"
+            ></div>
+        </div>
+        <!-- Thêm script axios qua CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script type="module" src="./assets/js/checkout.js"></script>
+    </body>
+</html>

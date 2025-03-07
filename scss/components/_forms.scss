@@ -20,28 +20,14 @@
         }
     }
     &__group {
-        margin-top: 30px;
-        @include abstracts.screen(md) {
-            margin-top: 20px;
-        }
+        margin-top: 25px;
+
         &--inline {
             display: flex;
             align-items: center;
         }
     }
-    &__group:has(:invalid):has(&__input:not(:placeholder-shown)) {
-        .form__text-input {
-            background-color: rgba(#ed4337, $alpha: 0.1);
-            border-color: #ed4337;
-        }
-        .form__error,
-        .form__input-icon-error {
-            display: block;
-        }
-        .form__input-icon {
-            display: none;
-        }
-    }
+ 
     &__text-area,
     &__text-input {
         display: flex;
@@ -91,13 +77,6 @@
     }
     &__input {
         width: 100%;
-        &-icon {
-            margin-left: 12px;
-        }
-        &-icon-error {
-            display: none;
-            animation: shake 1s;
-        }
     }
     &__dialog-heading {
         padding: 20px;
@@ -316,6 +295,27 @@
         transition: color 0.25s;
         &:hover {
             color: var(--text-color);
+        }
+    }
+    &__modal {
+        display: flex;
+        &--label {
+            padding: 10px;
+            height: 42px;
+            border-radius: 5px 0px 0px 5px;
+            background: #d2d1d6;
+        }
+        &--icon {
+            transform: translateY(1px);
+            width: 20px;
+            height: 20px;
+        }
+        &--input {
+            border-radius: 0px 5px 5px 0px;
+            width: 100%;
+        }
+        &--textArea {
+            border-radius: 0px 5px 5px 5px;
         }
     }
 }
